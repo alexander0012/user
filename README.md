@@ -71,7 +71,7 @@ Estos endpoints no requieren autenticación.
 ```
 {
   "name": "Juan Rodriguez",
-  "email": "juan.rodriguez@example.com",
+  "email": "juan.rodriguez@example.cl",
   "password": "aA123456!",
   "phones": [
     {
