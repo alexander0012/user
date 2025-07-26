@@ -40,7 +40,7 @@ El proyecto está preconfigurado para ejecutarse con una base de datos H2 en mem
 
 ### Pasos
 
-1.  **Clona el repositorio:**
+1.  **Clona el repositorio:** `https://github.com/alexander0012/user`
 
 2.  **Construye el proyecto:**
     Usa el wrapper de Gradle para compilar el proyecto y descargar las dependencias: `./gradlew clean build`
