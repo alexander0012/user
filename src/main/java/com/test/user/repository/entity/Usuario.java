@@ -29,6 +29,9 @@ public class Usuario extends Control implements UserDetails {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "edad", nullable = false)
+    private Integer edad;
+
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

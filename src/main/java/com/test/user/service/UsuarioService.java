@@ -11,8 +11,12 @@ import com.test.user.repository.UsuarioRepository;
 import com.test.user.repository.entity.Phone;
 import com.test.user.repository.entity.Usuario;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +25,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UsuarioService {
@@ -38,6 +43,7 @@ public class UsuarioService {
 
         var user = Usuario.builder()
                 .name(request.name())
+                .edad(request.edad())
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
                 .active(true)
@@ -91,6 +97,16 @@ public class UsuarioService {
 
     public List<UsuarioResponseDTO> findAll() {
         return usuarioRepository.findAll().stream().map(UsuarioResponseDTO::new).toList();
+    }
+
+    public List<UsuarioResponseDTO> searchUsers(int edad) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails userDetails) {
+            log.info("Usuario que realizo busqueda: " + userDetails.getUsername());
+        }
+
+            return usuarioRepository.findByEdadGreaterThanEqual(edad).stream().map(UsuarioResponseDTO::new).toList();
     }
 
     public List<UsuarioDetailsResponseDTO> findAllDetails() {

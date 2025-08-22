@@ -14,6 +14,7 @@ CREATE TABLE schema_test.usuario_t (
 
     -- Campos propios de la clase Usuario
                            name        VARCHAR(255) NOT NULL,
+                           edad        int NOT NULL,
                            email       VARCHAR(255) NOT NULL UNIQUE,
                            password    VARCHAR(255) NOT NULL
 );
